@@ -37,14 +37,7 @@
 - name: daemon reload
   ansible.builtin.systemd_service:
     daemon_reload: true  
-
-- name: start and enable backend service
-  tags: 
-  - deployment
-  ansible.builtin.service:
-    name: backend
-    state: restarted
-    enabled: yes      
+     
 
 - name: install python mysql dependencies
   ansible.builtin.pip: 
@@ -61,4 +54,10 @@
     target: /app/schema/backend.sql
     state: import
     name: all
-
+- name: start and enable backend service
+  tags: 
+  - deployment
+  ansible.builtin.service:
+    name: backend
+    state: restarted
+    enabled: yes
